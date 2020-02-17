@@ -22,6 +22,12 @@ namespace TSHPandaPortalAD
             routes.MapRoute(
                 "Niky"
                 , "{controller}/{action}");
+
+            routes.MapRoute(
+                name: "SetType",
+                url: "دسته-بندی-محصولات/{HasChang}/{Id}",
+                defaults: new { controller = "Panel", action = "SetType", id = UrlParameter.Optional }
+            );
         }
     }
 }

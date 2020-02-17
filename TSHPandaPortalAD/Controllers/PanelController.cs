@@ -18,11 +18,11 @@ namespace TSHPandaPortalAD.Controllers
             return View();
         }
 
-        public ActionResult SetType()
+        public ActionResult SetType(bool HasChang, int Id = 0)
         {
-            //bool HasChang, int Id = 0
-            bool HasChang = false;
-            int Id = 1;
+            //
+            //bool HasChang = false;
+            //int Id = 1;
             PDBC db = new PDBC("DBConnectionString", true);
             db.Connect();
             DataTable dt = db.Select(
@@ -57,6 +57,7 @@ namespace TSHPandaPortalAD.Controllers
                 if (dt1.Rows.Count!=0)
                 {
                     ModelView.Edit_Name =dt1.Rows[0][0].ToString();
+                    ModelView.Edit_Id = Id;
                 }
                 
             }
@@ -71,7 +72,7 @@ namespace TSHPandaPortalAD.Controllers
 
             db.Script("UPDATE[tbl_Product_Type] SET[ISDESABLED] = 0  WHERE id_PT=" + id);
 
-            return RedirectToAction("SetType", "Panel");
+            return RedirectToAction("SetType", "Panel", new { HasChang = false });
         }
 
         public ActionResult Disable(int id)
@@ -81,7 +82,7 @@ namespace TSHPandaPortalAD.Controllers
 
             db.Script("UPDATE[tbl_Product_Type] SET[ISDESABLED] = 1  WHERE id_PT=" + id);
 
-            return RedirectToAction("SetType","Panel");
+            return RedirectToAction("SetType","Panel", new { HasChang = false });
         }
 
         public ActionResult Delete(int id)
@@ -91,7 +92,26 @@ namespace TSHPandaPortalAD.Controllers
 
             db.Script("UPDATE[tbl_Product_Type] SET [ISDelete] = 1  WHERE id_PT=" + id);
 
-            return RedirectToAction("SetType", "Panel");
+            return RedirectToAction("SetType", "Panel", new { HasChang = false });
+        }
+
+        public ActionResult Add_Update_Type(bool HasChang, string text, int Id = 0)
+        {
+
+            PDBC db = new PDBC("DBConnectionString", true);
+            db.Connect();
+            if (HasChang)
+            {
+                db.Script("UPDATE [dbo].[tbl_Product_Type] SET [PTname] = N'" + text + "' WHERE id_PT=" + Id);
+            }
+            else
+            {
+                db.Script("INSERT INTO [dbo].[tbl_Product_Type] VALUES(N'" + text + "',0,0,null,null)");
+            }
+
+            return RedirectToAction("SetType", "Panel", new { HasChang = false });
+
+            //return Content((!HasChang).ToString());
         }
     }
 }

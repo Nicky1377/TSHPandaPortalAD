@@ -27,17 +27,87 @@
     }
 };
 
-//function NavClick() {
-//    $.ajax({
-//        url: "/Panel/Navigation",
-//        type: "get",
-//        success: function(response) {
-//            $("#NavMaster").html(response);
+function SubmitedType(action, id) {
+    if (action === 'new') {
+        var message = document.getElementById("inputNew").value;
+        if ($("#inputNew").val() !== '') {
 
-//            alert(response);
-//        }
-//    });
 
-    
-//    return false;
-//}
+            var AddressToSend = "/Panel/Add_Update_Type";
+
+            $.ajax({
+                url: AddressToSend,
+                type: "get",
+                data: { "HasChang": false, "text": message,"Id":id},
+                success: function (response) {
+                    $("#ERRAlertNew").hide(300);
+                    $("#SuccesAlertNew").show(300);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(textStatus);
+                }
+            });
+            return false;
+        } else {
+            $("#ERRAlertNew").show(300);
+        }
+
+
+    } else if (action === 'edit') {
+
+        if ($("#inputEdit").val() !== '') {
+
+            var message = document.getElementById("inputEdit").value;
+            var AddressToSend = "/Panel/Add_Update_Type";
+
+            $.ajax({
+                url: AddressToSend,
+                type: "get",
+                data: { "HasChang": true, "text": message, "Id": id },
+                success: function (response) {
+                    $("#ERRAlertEdit").hide(300);
+                    $("#SuccesAlertEdit").show(300);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(textStatus);
+                }
+            });
+            return false;
+        } else {
+            $("#ERRAlertEdit").show(300);
+        }
+    }
+}
+
+
+function ModallFunc(action,id) {
+    if (action === 'delete') {
+        $.ajax({
+            url: "/Panel/Delete",
+            type: "get",
+            data: { "id": id },
+            success: function (response) {
+               
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(textStatus);
+            }
+        });
+        return false;
+
+    } else if (action === 'disable') {
+        $.ajax({
+            url:"/Panel/Disable",
+            type: "get",
+            data: {  "id": id },
+            success: function (response) {
+               
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(textStatus);
+            }
+        });
+        return false;
+    } 
+
+}
