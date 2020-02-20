@@ -1,18 +1,14 @@
 ﻿
 @{
-    ViewBag.Title = "Test";
+    ViewBag.Titel = "Index";
     Layout = "~/Views/masters/webMaster.cshtml";
 }
-
-<h2>Test</h2>
-
-
 <!--START : TBLS-->
 <div class="kt-portlet">
     <div class="kt-portlet__head">
         <div class="kt-portlet__head-label">
             <h3 class="kt-portlet__head-title">
-                دسته بندی اصلی محصولات(mainCatgory)
+                دسته بندی اصلی محصولات(SubCatgory)
             </h3>
         </div>
     </div>
@@ -39,11 +35,11 @@
                     <div class="form-group">
                         <label for="datatype">دسته بندی محصول:</label>
 
-                        <select id="datatype" class="form-control">
+                        <select id="dataSub" class="form-control">
                             <option>انتخاب محصول...</option>
-                            @for (int i = 0; i < ViewBag.Cat.Count; i++)
+                            @for (int i = 0; i < ViewBag.Sub.Count; i++)
                             {
-                                <option value="@ViewBag.Cat[i].id_PT">@ViewBag.Cat[i].PTname</option>
+                                <option value="@ViewBag.Sub[i].id_MC">@ViewBag.Sub[i].MCName</option>
                             }
 
                         </select>
@@ -113,12 +109,12 @@
             if (action === 'new') {
                 if ($("#inputNew").val() !== '') {
 
-                    var AddressToSend = "CatPage";
+                    var AddressToSend = "SubPage";
                     var PostJson = {
                         'action': 'new',
                         'value': $("#inputNew").val(),
                         'id': '0',
-                        'data_typa': $("#datatype").val()
+                        'data_Sub': $("#dataSub").val()
                     };
 
                     $.ajax({
@@ -130,7 +126,7 @@
 
                               $("#ERRAlertNew").hide(300);
                               $("#SuccesAlertNew").show(300);
-                              $('#show_tabCat').load("https://localhost:44395/MS/table_Cat");
+                              $('#show_tabSub').load("https://localhost:44395/MS/table_Sub");
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             alert(textStatus);
@@ -147,7 +143,7 @@
 
                 if ($("#inputEdit").val() !== '') {
 
-                    var AddressToSend = "CatPage";
+                    var AddressToSend = "SubPage";
                     var PostJson = {
                         'action': 'edit',
                         'value': $("#inputEdit").val(),
@@ -163,7 +159,7 @@
                         success: function (response) {
                             $("#ERRAlertEdit").hide(300);
                             $("#SuccesAlertEdit").show(300);
-                            $('#show_tabCat').load("https://localhost:44395/MS/table_Cat");
+                            $('#show_tabSub').load("https://localhost:44395/MS/table_Sub");
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             alert(textStatus);
@@ -176,3 +172,4 @@
             }
         }
 </script>
+

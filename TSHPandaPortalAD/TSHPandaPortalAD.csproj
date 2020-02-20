@@ -120,6 +120,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\MSController.cs" />
     <Compile Include="Controllers\PanelController.cs" />
     <Compile Include="DBConnect\ExcParameters.cs" />
     <Compile Include="DBConnect\PDBC.cs" />
@@ -127,8 +128,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MainCategory.cs" />
+    <Compile Include="Models\SubCategory.cs" />
+    <Compile Include="Models\SubCategoryOptionKey.cs" />
+    <Compile Include="Models\type.cs" />
+    <Compile Include="Models\TypeASPX.cs" />
     <Compile Include="Models\Type_Model.cs" />
     <Compile Include="ModelView\SetTypeModelView.cs" />
+    <Compile Include="ModelView\table_CategoryModelView.cs" />
+    <Compile Include="OtherClasses\SearchClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -461,6 +469,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="CustomScript\CategoryScript.js" />
     <Content Include="CustomScript\Master.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -736,10 +745,18 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\masters\webMaster.cshtml" />
-    <Content Include="Views\Panel\Index.cshtml" />
-    <Content Include="Views\Panel\SetType.cshtml" />
-    <Content Include="Views\Panel\Test.cshtml" />
-    <Content Include="Views\Panel\_SetTypeItem.cshtml" />
+    <Content Include="Views\MS\Index.cshtml" />
+    <Content Include="Views\MS\maincat.cshtml" />
+    <Content Include="Views\MS\New_Cat.cshtml" />
+    <Content Include="Views\MS\New_SCK.cshtml" />
+    <Content Include="Views\MS\New_Sub.cshtml" />
+    <Content Include="Views\MS\New_type.cshtml" />
+    <Content Include="Views\MS\SubCat.cshtml" />
+    <Content Include="Views\MS\SubCatKey.cshtml" />
+    <Content Include="Views\MS\table_Cat.cshtml" />
+    <Content Include="Views\MS\table_SCK.cshtml" />
+    <Content Include="Views\MS\table_Sub.cshtml" />
+    <Content Include="Views\MS\table_Type.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

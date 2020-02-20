@@ -27,6 +27,9 @@
     }
 };
 
+function passID(id) {
+    $("#modalChangerDeleteID").val(id);
+}
 function SubmitedType(action, id) {
     if (action === 'new') {
         var message = document.getElementById("inputNew").value;
@@ -80,14 +83,14 @@ function SubmitedType(action, id) {
 }
 
 
-function ModallFunc(action,id) {
+function ModallFunc(action) {
     if (action === 'delete') {
         $.ajax({
             url: "/Panel/Delete",
             type: "get",
-            data: { "id": id },
+            data: { "id": $("#modalChangerDeleteID").val() },
             success: function (response) {
-               
+                $("#modalChangerDeleteID").val('');
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(textStatus);
@@ -99,9 +102,9 @@ function ModallFunc(action,id) {
         $.ajax({
             url:"/Panel/Disable",
             type: "get",
-            data: {  "id": id },
+            data: { "id": $("#modalChangerEditID").val() },
             success: function (response) {
-               
+                $("#modalChangerEditID").val('');
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(textStatus);

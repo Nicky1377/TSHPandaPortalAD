@@ -16,7 +16,7 @@ namespace TSHPandaPortalAD
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Panel", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "MS", action = "Index", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(

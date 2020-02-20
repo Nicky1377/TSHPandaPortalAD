@@ -9,7 +9,8 @@ namespace TSHPandaPortalAD
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/assets/js/jQ/jquery.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -35,7 +36,11 @@ namespace TSHPandaPortalAD
                 "~/assets/js/pages/dashboard.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/MasterScript").Include(
-                "~/CustomScript/Master.js"));
+                "~/CustomScript/Master.js",
+                "~/CustomScript/CategoryScript.js"));
+            
+            bundles.Add(new ScriptBundle("~/bundles/CategoryScript").Include(
+                "~/CustomScript/CategoryScript.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

@@ -1,41 +1,43 @@
-﻿
+﻿@using Microsoft.Ajax.Utilities
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Titel = "Index";
     Layout = "~/Views/masters/webMaster.cshtml";
 }
 
-@*<div ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="row">
-        <div class="col">
-            <div class="alert alert-light alert-elevate fade show" role="alert">
-                <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
-                <div class="alert-text">
-                    توجه داشته باشید که پس از ویرایش دسته بندی اصلی محصولات کلیه محصولات موجود در آن دسته بندی تقییر خواهند کرد
-                    <br />
-                    <span>
-                        بخش <span class="kt-badge kt-badge--inline kt-badge--warning">غیرفعال کردن</span> تمامی محصولات زیر شاخه آن دسته بندی را از دید کاربران مخفی میکند
-                    </span>
-                    <br style="height: 10px;" />
-                    <span>
-                        بخش <span class="kt-badge kt-badge--inline kt-badge--danger">حذف</span> تمامی محصولات زیرشاخه آن دسته بندی را <span class="kt-badge kt-badge--inline kt-badge--danger">حذف</span> خواهد کرد
-                    </span>
+    <div ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-light alert-elevate fade show" role="alert">
+                    <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
+                    <div class="alert-text">
+                        توجه داشته باشید که پس از ویرایش دسته بندی اصلی محصولات کلیه محصولات موجود در آن دسته بندی تقییر خواهند کرد
+                        <br />
+                        <span>
+                            بخش <span class="kt-badge kt-badge--inline kt-badge--warning">غیرفعال کردن</span> تمامی محصولات زیر شاخه آن دسته بندی را از دید کاربران مخفی میکند
+                        </span>
+                        <br style="height: 10px;" />
+                        <span>
+                            بخش <span class="kt-badge kt-badge--inline kt-badge--danger">حذف</span> تمامی محصولات زیرشاخه آن دسته بندی را <span class="kt-badge kt-badge--inline kt-badge--danger">حذف</span> خواهد کرد
+                        </span>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    START : TBLS
-    <div id="show_newtype">
+        <!--START : TBLS-->
+     
+        <div id="show_newtype">
 
-    </div>
-    END : TBLS
-    START : TBLS
-    <div id="show_tab">
+        </div>
+        <!--END : TBLS-->
+        <!--START : TBLS-->
+        <div id="show_tab">
 
+        </div>
+        <!--END : TBLS-->
     </div>
-    END : TBLS
-</div>
-START : EDITMODAL
+<!--START : EDITMODAL-->
 <div class="modal fade" id="PandaEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered " role="document">
         <div class="modal-content ">
@@ -62,8 +64,8 @@ START : EDITMODAL
         </div>
     </div>
 </div>
-END : EDITMODAL
-START : DELETEMODAL
+<!--END : EDITMODAL-->
+<!--START : DELETEMODAL-->
 <div class="modal fade" id="PandaDeletModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered " role="document">
         <div class="modal-content ">
@@ -90,8 +92,8 @@ START : DELETEMODAL
         </div>
     </div>
 </div>
-END : DELETEMODAL
-START : ONMODAL
+<!--END : DELETEMODAL-->
+<!--START : ONMODAL-->
 <div class="modal fade" id="PandaonModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered " role="document">
         <div class="modal-content ">
@@ -118,8 +120,8 @@ START : ONMODAL
         </div>
     </div>
 </div>
-END : ONMODAL
-START : editMODAL
+<!--END : ONMODAL-->
+<!--START : editMODAL-->
 <div class="modal fade" id="PandaedittModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered " role="document">
         <div class="modal-content ">
@@ -146,63 +148,15 @@ START : editMODAL
         </div>
     </div>
 </div>
-END : editMODAL
+<!--END : editMODAL-->
 
 
-<script>function modalloader(name, id) {
+@Scripts.Render("~/bundles/CategoryScript");
 
-        document.getElementById("off").innerHTML = name;
-        $("#modeloff").val(id);
-
-        document.getElementById("delete").innerHTML = name;
-        $("#modeldelete").val(id);
-
-        document.getElementById("on").innerHTML = name;
-        $("#modelon").val(id);
-
-        document.getElementById("edit").innerHTML = name;
-        $("#modeledit").val(id);
-
-    }</script>
-
-<script>$(document).ready(function () {
-             $('#show_newtype').load("https://localhost:44395/MS/New_type");
-             $('#show_tab').load("https://localhost:44395/MS/table_Type");
-        });
-
-
-    function savePics(action) {
-        var myObject = {
-            firstName: "#model",
-            lastName: action,
-            fullName: function () {
-                return this.firstName + "" + this.lastName;
-            }
-        }
-        var x = myObject.fullName();
-        var id = $(x).val();
-
-
-        var AddressToSend = "Type_Switch";
-        var PostJson = {
-            'action': action,
-            'id': id
-        };
-        $.ajax({
-            url: AddressToSend,
-            type: "post",
-            data: JSON.stringify(PostJson),
-            contentType: "application/json; charset=utf-8",
-            success: function (response) {
-                $("#ERRAlertNew").hide(300);
-                $("#SuccesAlertNew").show(300);
-                $('#show_tab').load("https://localhost:44395/MS/table_Type");
-                $('#show_newtype').load("https://localhost:44395/MS/New_type");
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(textStatus);
-            }
-        });
-        return false;
-    }</script>*@
+<script>
+    $(document).ready(function() {
+        alert("helooooo");
+        
+    })
+</script>
 
